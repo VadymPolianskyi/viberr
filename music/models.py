@@ -1,5 +1,5 @@
-from django.db import models
 from django.core.urlresolvers import reverse
+from django.db import models
 
 
 class Album(models.Model):
@@ -17,8 +17,8 @@ class Album(models.Model):
 
 class Song(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
-    file_type = models.CharField(max_length=10)
     song_title = models.CharField(max_length=250)
+    audio_file = models.FileField(default='')
     is_favorite = models.BooleanField(default=False)
 
     def __str__(self):

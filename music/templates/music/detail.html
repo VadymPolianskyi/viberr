@@ -28,7 +28,7 @@
 
             <ul class="nav nav-pills" style="margin-bottom: 10px;">
                 <li role="presentation" class="active"><a href="{% url 'music:detail' album.id %}">View All</a></li>
-                <li role="presentation"><a href="#">Add New Song</a></li>
+                <li role="presentation"><a href="{% url 'music:song_add' album.id %}">Add New Song</a></li>
             </ul>
 
             <div class="panel panel-default">
@@ -61,7 +61,7 @@
                                     </a>
                                 </td>
                                 <td>
-{#                                    <a href="{% url 'music:favorite' song.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star {% if song.is_favorite %}active{% endif %}"></span></a>#}
+                                    <a href="{% url 'music:favorite' song.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star{% if not song.is_favorite %}-empty{% endif %}"></span></a>
                                 </td>
                                 <td>
                                     <form action="{% url 'music:index' %}" method="get" style="display: inline;">

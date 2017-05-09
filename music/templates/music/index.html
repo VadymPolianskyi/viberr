@@ -30,13 +30,21 @@
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
                             </form>
+                            <form action="{% url 'music:album-update' album.id %}" method="get" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ album.id }}" />
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                            </form>
 
                             <!-- Favorite Album -->
-{#                            <a href="{% url 'music:favorite_album' album.id %}" class="btn btn-default btn-sm btn-favorite" role="button">#}
+{#                            <a href="{% url 'music:index' index %}" class="btn btn-default btn-sm btn-favorite" role="button">#}
 {#                                <span class="glyphicon glyphicon-star {% if album.is_favorite %}active{% endif %}"></span>#}
 {#                            </a>#}
 
                         </div>
+
                     </div>
                 </div>
             {% endfor %}
