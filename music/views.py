@@ -1,12 +1,13 @@
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.views.generic import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .forms import UserForm
-from .models import Album
+from .models import Album, Song
 
 
 class IndexView(generic.ListView):
@@ -17,12 +18,13 @@ class IndexView(generic.ListView):
         return Album.objects.all()
 
 
-class DetailView(generic.DeleteView):
+class DetailView(generic.DetailView):
     model = Album
     template_name = 'music/detail.html'
 
 
 class AlbumCreate(CreateView):
+    template_name = 'music/create_album.html'
     model = Album
     fields = ['artist', 'album_title', 'genre', 'album_logo']
 
@@ -64,3 +66,17 @@ class UserFormView(View):
                     return redirect('music:index')
 
         return render(request, self.template_name, {'form': form})
+
+
+def favorite(request, song_id):
+    song = get_object_or_404(Song, pk=song_id)
+
+    try:
+        if song.is_favorite:
+            song.is_favorite = False
+        else:
+            song.is_favorite = True
+        song.save()
+    except (KeyError, Song.DoesNotExist):
+       return JsonResponse({'success': False})
+    return render(request, 'music/detail.html', {'album': song.album})

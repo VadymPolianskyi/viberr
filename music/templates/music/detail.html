@@ -61,7 +61,7 @@
                                     </a>
                                 </td>
                                 <td>
-{#                                    <a href="{% url 'music:favorite' song.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star {% if song.is_favorite %}active{% endif %}"></span></a>#}
+                                    <a href="{% url 'music:favorite' song.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star{% if not song.is_favorite %}-empty{% endif %}"></span></a>
                                 </td>
                                 <td>
                                     <form action="{% url 'music:index' %}" method="get" style="display: inline;">
