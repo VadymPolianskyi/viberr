@@ -14,6 +14,9 @@ urlpatterns = [
     #/music/712/
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
 
+    #/music/712/play/3
+    url(r'^(?P<album_id>[0-9]+)/play/(?P<song_id>[0-9]+)$', views.play, name='play'),
+
     #/music/4/add/
     url(r'^(?P<album_id>[0-9]+)/add/$', views.create_song, name='song_add'),
 

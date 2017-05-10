@@ -54,7 +54,7 @@
                             <tr>
                                 <td>{{ song.song_title }}</td>
                                 <td>
-                                    <a target="_blank" href="{{ song.audio_file.url }}">
+                                    <a href="{% url 'music:play' album.id song.id %}">
                                         <button type="button" class="btn btn-success btn-xs">
                                             <span class="glyphicon glyphicon-play"></span>&nbsp; Play
                                         </button>
@@ -81,6 +81,11 @@
             </div>
 
         </div>
+    {% if song.audio_file is not None %}
+        <div>
+            <audio src="{{ song.audio_file.url }}" preload="auto" />
+        </div>
+    {% endif %}
 
     </div>
 

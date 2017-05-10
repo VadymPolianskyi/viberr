@@ -11,7 +11,7 @@ from .models import Album, Song
 
 INDEX_ADDRESS = 'music/index.html'
 ALBUM_ADDRESS = 'music/create_album.html'
-CREATE_SONG_ADDRESS = 'music/create_album.html'
+CREATE_SONG_ADDRESS = 'music/create_song.html'
 DETAIL_ADDRESS = 'music/detail.html'
 REGISTRATION_FORM_ADDRESS = 'music/registration_form.html'
 
@@ -30,6 +30,22 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Album
     template_name = DETAIL_ADDRESS
+
+
+# def detail(request, album_id):
+#     album = get_object_or_404(Album, pk=album_id)
+#
+#     return render(request, DETAIL_ADDRESS, {'album': album})
+
+
+def play(request, song_id, album_id):
+    song = get_object_or_404(Song, pk=song_id)
+    album = get_object_or_404(Album, pk=album_id)
+    context = {
+        'album': album,
+        'song': song
+    }
+    return render(request, DETAIL_ADDRESS, context)
 
 
 def create_song(request, album_id):
