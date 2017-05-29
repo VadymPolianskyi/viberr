@@ -9,3 +9,10 @@ body{
 .navbar-brand{
     font-family: 'Satisfy', cursive;
 }
+
+.audiojs {
+    border-radius: 50%;
+}
+#audiojs {
+    border-radius: 50%;
+}
